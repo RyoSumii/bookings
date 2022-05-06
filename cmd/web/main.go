@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/RyoSumii/bookings/pkg/config"
-	"github.com/RyoSumii/bookings/pkg/handlers"
-	"github.com/RyoSumii/bookings/pkg/render"
+	"github.com/RyoSumii/bookings/internal/config"
+	"github.com/RyoSumii/bookings/internal/handlers"
+	"github.com/RyoSumii/bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
 	"log"
 	"net/http"
