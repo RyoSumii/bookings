@@ -32,21 +32,22 @@
     <script>
         document.getElementById("check-availability-button").addEventListener("click", function() {
             let html = `
-<form id="check-availability-form" action="" method="post" novalidate class="needs-validation search-form">
-    <div class="row">
-        <div class="col">
-            <div class="row" id="reservation-dates-modal">
-                <div class="col">
-                    <input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
-                </div>
-                <div class="col">
-                    <input disabled required class="form-control" type="text" name="end" id="end" placeholder="Departure">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-`
+                        <form id="check-availability-form" action="" method="post" novalidate class="needs-validation search-form">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row" id="reservation-dates-modal">
+                                        <div class="col">
+                                            <input disabled required class="form-control" type="text" name="start" id="start" placeholder="Arrival">
+                                        </div>
+                                        <div class="col">
+                                            <input disabled required class="form-control" type="text" name="end" id="end" placeholder="Departure">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        `
+
             attention.custom({
                 msg: html,
                 title: "Choose your dates",
@@ -57,6 +58,7 @@
                         showOnFocus: true,
                         orientation: 'auto top',
                         autohide: true,
+                        minDate: new Date()
                     })
                 },
 
@@ -68,9 +70,10 @@
                 callback: function(result) {
                     console.log("called");
 
-                    let form = document.getElementById("check-availability-form")
-                    let formData = new FormData(form)
+                    let form = document.getElementById("check-availability-form");
+                    let formData = new FormData(form);
                     formData.append("csrf_token", {{.CSRFToken}});
+                    formData.append("room_id", "1");
 
                     fetch('/search-availability-json',{
                         method: 'post',
@@ -78,9 +81,11 @@
                     })
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
-                            console.log(data.ok);
-                            console.log(data.message);
+                            if (data.ok) {
+                                console.log("room is available")
+                            }else {
+                                console.log("room is not available")
+                            }
 
                         })
                 }
