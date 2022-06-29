@@ -1,11 +1,13 @@
 package config
 
 import (
+	"github.com/RyoSumii/bookings/internal/models"
 	"github.com/alexedwards/scs/v2"
 	"html/template"
 	"log"
 )
 
+// AppConfig holds the application config
 type AppConfig struct {
 	UseCache      bool
 	TemplateCache map[string]*template.Template
@@ -13,4 +15,5 @@ type AppConfig struct {
 	ErrorLog      *log.Logger
 	InProduction  bool
 	Session       *scs.SessionManager
+	MailChan      chan models.MailData
 }
