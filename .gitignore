@@ -1,5 +1,6 @@
 .idea
 bookings.exe
+bookings
 run.bat
 run.sh
 database.yml
